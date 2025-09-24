@@ -1,0 +1,72 @@
+// AVAP API Template 2023-2025
+// This is a basic starting point for developing an API using AVAP language.
+// You can find more information at https://developer.avapframework.com 
+
+// The code defines a global variable, optionally captures request parameters,
+// and returns a structured response to the client.
+
+// -------------------------------------------------
+// 1. GLOBAL VARIABLE CREATION
+// -------------------------------------------------
+
+// Creates a global variable named 'final_message' with the value \"Hello World!\".
+// These variables remain available throughout the APIbs execution lifecycle.
+
+addVar(final_message, 'Hello World!')
+
+// -------------------------------------------------
+// 2. CAPTURE REQUEST PARAMETERS
+// -------------------------------------------------
+
+// You can capture parameters sent by the client via query string, headers, or request body.
+// For instance, to capture a query parameter named 'name', use:
+
+/*
+ Syntax: addParam(name_recovered, name)
+ - source: query | header | body
+ Captures 'name' from the query string if present
+*/
+
+addParam(name,name_recovered)  
+
+// -------------------------------------------------
+// 3. DATABASE READ / WRITE OPERATIONS
+// -------------------------------------------------
+
+// You can read or write from a database into AVAP variables.
+// This template omits real DB operations, but here's an example:
+
+// ormAccessSelect('username,id', dbase, 'age > 25', usersList)
+
+// AVAP allows you to connect to databases using AVAP Connectors, external database libraries, 
+// psql_connector = avapConnector(\"REJfQ09OTkVDVE9SMTc1MDQ2MjI0MDMyO1=\")
+// users = psql_connector.query(\"select * from obex_users;\")
+// or its native ORM capabilities.
+
+// -------------------------------------------------
+// 4. BUSINESS LOGIC
+// -------------------------------------------------
+
+// You can add validations, conditions, loops, or transformations here.
+// Example: personalize the message if 'name' was provided.
+
+if(name_recovered,None,'!=')
+    final_message = \"Hello %s\" % name_recovered
+end()
+
+// -------------------------------------------------
+// 5. BUILD THE RESPONSE
+// -------------------------------------------------
+
+// Adds the variable 'final_message' to the result object.
+// Any variable added via 'addResult' will be included in the API response.
+
+// To control the HTTP status code returned by the API, assign it to the '_status' system variable.
+
+addVar(_status,205)
+
+// Use addResult to include it in the final response payload.
+
+addResult(_status)
+
+addResult(final_message)
